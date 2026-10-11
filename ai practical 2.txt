@@ -1,0 +1,31 @@
+practical -2 Uniform Cost Search (UCS)
+
+
+import heapq
+
+graph = {
+    'A': [('B', 1), ('C', 4)],
+    'B': [('D', 2), ('E', 5)],
+    'C': [('F', 3)],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+start = 'A'
+goal = 'D'
+
+queue = [(0, start, [start])]
+
+while queue:
+    cost, node, path = heapq.heappop(queue)
+
+    if node == goal:
+        print("Path:", path)
+        print("Cost:", cost)
+        break
+
+    for neighbour, weight in graph[node]:
+        heapq.heappush(queue, (cost + weight, neighbour, path + [neighbour]))
+
+
